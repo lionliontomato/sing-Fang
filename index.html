@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>莫蘭迪藍歌單</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="float-layer" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="hero__glow"></div>
+    <div class="hero__content">
+      <p class="eyebrow">Morandi Blue Playlist</p>
+      <h1>我的歌單收藏</h1>
+      <p class="subtitle">依照你的 Google 試算表同步歌曲與標籤，重新整理即可套用最新變更。</p>
+
+      <div class="search-card">
+        <div class="search-box">
+          <span>🔎</span>
+          <input id="searchInput" type="search" placeholder="搜尋歌名、歌手或標籤…" autocomplete="off" />
+        </div>
+        <button id="clearBtn" type="button">清除</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Tags</p>
+          <h2>標籤篩選</h2>
+        </div>
+        <p id="activeHint" class="active-hint">目前顯示全部歌曲</p>
+      </div>
+      <div id="tagFilters" class="tag-filters" aria-label="標籤篩選"></div>
+    </section>
+
+    <section class="panel songs-panel">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Songs</p>
+          <h2>歌曲列表</h2>
+        </div>
+        <p id="countText" class="count-text">正在讀取…</p>
+      </div>
+
+      <div id="songGrid" class="song-grid"></div>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <div>☁️</div>
+        <h3>沒有找到符合的歌曲</h3>
+        <p>可以換一個關鍵字，或再點一次標籤取消篩選。</p>
+      </div>
+
+      <div id="errorState" class="empty-state error" hidden>
+        <div>⚠️</div>
+        <h3>讀取不到試算表</h3>
+        <p>請確認試算表權限為「知道連結的任何人可檢視」，或重新整理頁面。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with Morandi blue, floating flowers, and your Google Sheet.</p>
+  </footer>
+
+  <script>
+    window.PLAYLIST_CONFIG = {
+      sheetId: "1-4mY86ruT2HnTWpPI9MJ9MYPWVTE_Yi3Zoe3PZIMSbs",
+      startRow: 3,
+      columns: {
+        title: 0,
+        artist: 1,
+        songTags: 2,
+        link: 3,
+        masterTags: 5
+      }
+    };
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+:root{
+  --blue-900:#2f3f4f;--blue-800:#3d5365;--blue-700:#506b7f;--blue-500:#7f9cad;
+  --blue-100:#eef4f6;--paper:rgba(255,255,255,.74);--ink:#31404b;--muted:#71818b;
+  --shadow:0 20px 55px rgba(43,69,85,.16);--radius:28px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  margin:0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);min-height:100vh;
+  background:
+    radial-gradient(circle at 8% 10%,rgba(255,255,255,.96),transparent 24%),
+    radial-gradient(circle at 88% 8%,rgba(174,197,209,.7),transparent 26%),
+    radial-gradient(circle at 18% 72%,rgba(223,214,207,.62),transparent 30%),
+    radial-gradient(circle at 86% 82%,rgba(187,205,213,.66),transparent 32%),
+    linear-gradient(135deg,#eef5f7 0%,#d7e4ea 42%,#f5efe7 100%);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.48;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.46) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.2));
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:auto -10% -18% -10%;
+  height:46vh;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 25% 60%,rgba(255,255,255,.52),transparent 42%),
+    radial-gradient(ellipse at 72% 34%,rgba(127,156,173,.22),transparent 44%);
+  filter:blur(2px);
+}
+.float-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float-item{position:absolute;top:110%;opacity:.72;filter:drop-shadow(0 8px 14px rgba(60,78,92,.16));animation:floatUp linear infinite}
+@keyframes floatUp{from{transform:translateY(0) rotate(0)}to{transform:translateY(-125vh) rotate(360deg)}}
+.hero{position:relative;z-index:1;padding:76px 20px 36px}
+.hero__content{max-width:1040px;margin:0 auto;text-align:center;position:relative}
+.hero__glow{position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.42);filter:blur(14px);left:50%;top:30px;transform:translateX(-50%)}
+.eyebrow,.section-kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--blue-700);font-size:.78rem;font-weight:700}
+h1{margin:10px 0 12px;font-size:clamp(2.6rem,7vw,5.8rem);line-height:1;color:var(--blue-900);letter-spacing:.02em}
+.subtitle{max-width:690px;margin:0 auto 28px;color:var(--muted);line-height:1.9}
+.search-card{display:flex;gap:12px;max-width:760px;margin:0 auto;padding:12px;border:1px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(255,255,255,.55);box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+.search-box{flex:1;display:flex;align-items:center;gap:10px;padding:0 18px}
+.search-box input{border:0;outline:0;background:transparent;width:100%;font-size:1rem;color:var(--ink)}
+button{font-family:inherit;border:0;cursor:pointer}
+#clearBtn{border-radius:999px;padding:12px 24px;background:var(--blue-800);color:#fff;font-weight:700;box-shadow:0 12px 24px rgba(61,83,101,.22)}
+.page{position:relative;z-index:1;width:min(1120px,calc(100% - 32px));margin:0 auto 72px}
+.panel{background:var(--paper);border:1px solid rgba(255,255,255,.72);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(16px);padding:26px;margin-bottom:22px}
+.section-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:20px}
+.section-head h2{margin:2px 0 0;color:var(--blue-900)}
+.active-hint,.count-text{color:var(--muted);margin:0;font-size:.94rem}
+.tag-filters{display:flex;flex-wrap:wrap;gap:10px}
+.tag-btn{border-radius:999px;padding:10px 16px;color:#fff;font-weight:700;letter-spacing:.02em;box-shadow:0 10px 20px rgba(67,83,96,.12);transition:.2s ease;position:relative;overflow:hidden}
+.tag-btn:hover{transform:translateY(-2px)}
+.tag-btn.active{outline:3px solid rgba(255,255,255,.95);box-shadow:0 0 0 3px rgba(68,91,108,.38),0 14px 26px rgba(55,75,91,.18)}
+.song-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:16px}
+.song-card{min-height:178px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.72);border-radius:24px;padding:18px;box-shadow:0 12px 32px rgba(48,70,86,.09);transition:.22s ease}
+.song-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(48,70,86,.15)}
+.song-title{margin:0 0 8px;color:var(--blue-900);font-size:1.12rem;line-height:1.45}
+.artist{margin:0;color:var(--muted);font-weight:600}
+.song-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.song-tag{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:700;color:var(--blue-800);background:var(--blue-100)}
+.song-link{display:inline-flex;margin-top:14px;color:#fff;background:var(--blue-700);border-radius:999px;padding:8px 12px;font-size:.82rem;font-weight:800;text-decoration:none;width:max-content}
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-state div{font-size:3rem}.empty-state h3{color:var(--blue-900);margin:12px 0 6px}.error{color:#8a5b55}
+.footer{position:relative;z-index:1;text-align:center;color:var(--muted);padding:0 20px 36px}
+@media(max-width:720px){.hero{padding-top:52px}.search-card{border-radius:26px;flex-direction:column}#clearBtn{width:100%}.section-head{align-items:flex-start;flex-direction:column}.panel{padding:20px}}
+
+
+/* 彩色歌曲卡片與複製功能 */
+.song-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg, var(--card-from, rgba(255,255,255,.74)), var(--card-to, rgba(238,244,246,.78)));
+}
+.song-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.55), transparent 28%),
+    linear-gradient(135deg, rgba(255,255,255,.22), transparent 58%);
+  pointer-events:none;
+}
+.song-card > *{
+  position:relative;
+  z-index:1;
+}
+.card-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.copy-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:.82rem;
+  font-weight:800;
+  color:var(--blue-800);
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 8px 18px rgba(48,70,86,.09);
+  transition:.18s ease;
+}
+.copy-btn:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.92);
+}
+.copy-btn.copied{
+  color:#fff;
+  background:var(--blue-700);
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  padding:12px 18px;
+  border-radius:999px;
+  background:rgba(47,63,79,.92);
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 16px 38px rgba(47,63,79,.28);
+  opacity:0;
+  pointer-events:none;
+  transition:.24s ease;
+  z-index:20;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+
+.hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:34px;
+  width:min(920px,92vw);
+  height:260px;
+  transform:translateX(-50%);
+  border-radius:46px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05)),
+    repeating-linear-gradient(120deg,rgba(255,255,255,.22) 0 1px,transparent 1px 18px);
+  border:1px solid rgba(255,255,255,.28);
+  pointer-events:none;
+  z-index:-1;
+}
+.song-title{
+  font-size:1.28rem;
+  font-weight:900;
+  letter-spacing:.015em;
+  color:#263947;
+  line-height:1.38;
+  text-shadow:0 1px 0 rgba(255,255,255,.75);
+}
+.song-card:hover .song-title{
+  color:#1f3442;
+}
+
+
+/* 歌名強化：移除短線，只保留更清楚的文字焦點 */
+.song-title{
+  font-size:1.42rem;
+  font-weight:900;
+  letter-spacing:.02em;
+  line-height:1.35;
+  color:#223847;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.9),
+    0 3px 12px rgba(80,107,127,.12);
+}
+.song-title::after{
+  content:none!important;
+  display:none!important;
+}
+.artist{
+  font-size:.92rem;
+  color:#7c8b95;
+}
+
+
+/* 卡片內容置中＋複製按鈕移到右下角 */
+.song-card{
+  text-align:center;
+  padding-bottom:58px;
+}
+.song-card > div:first-child{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.song-title{
+  text-align:center;
+  width:100%;
+}
+.artist{
+  text-align:center;
+}
+.song-tags{
+  justify-content:center;
+  align-items:center;
+}
+.card-actions{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  z-index:2;
+  margin-top:0;
+  justify-content:flex-end;
+}
+.copy-btn{
+  min-width:64px;
+  justify-content:center;
+}
+.song-link{
+  margin-top:0;
+}
+
+
+/* 參考 Tomato 的歌單卡片比例：內容集中、底部操作固定但不壓迫 */
+.song-grid{
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:18px;
+}
+.song-card{
+  min-height:218px;
+  padding:22px 20px 18px;
+  text-align:center;
+  display:grid;
+  grid-template-rows:1fr auto;
+  align-items:stretch;
+}
+.song-card > div:first-child{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height:112px;
+  padding:4px 6px 8px;
+}
+.song-title{
+  font-size:1.36rem;
+  font-weight:900;
+  line-height:1.38;
+  text-align:center;
+  margin:0 0 9px;
+  max-width:100%;
+}
+.artist{
+  font-size:.94rem;
+  line-height:1.5;
+  text-align:center;
+  margin:0;
+}
+.song-card > div:nth-child(2){
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.song-tags{
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  margin-top:8px;
+  margin-bottom:16px;
+  min-height:28px;
+}
+.song-tag{
+  padding:6px 11px;
+}
+.card-actions{
+  position:static;
+  width:100%;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  margin-top:0;
+}
+.copy-btn{
+  min-width:68px;
+  padding:8px 14px;
+}
+.song-link{
+  padding:8px 13px;
+}
+@media(max-width:560px){
+  .song-grid{
+    grid-template-columns:1fr;
+  }
+  .song-card{
+    min-height:200px;
+  }
+}
+
+
+/* 長方形歌曲卡片定稿版 */
+.song-grid{
+  grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+  gap:16px;
+}
+.song-card{
+  min-height:148px;
+  padding:20px 22px 18px;
+  border-radius:24px;
+  text-align:left;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  align-items:stretch;
+}
+.song-card > div:first-child{
+  display:block;
+  min-height:0;
+  padding:0;
+  text-align:left;
+}
+.song-title{
+  font-size:1.48rem;
+  font-weight:900;
+  line-height:1.32;
+  text-align:left;
+  margin:0 0 6px;
+  color:#223847;
+}
+.artist{
+  font-size:.94rem;
+  line-height:1.45;
+  text-align:left;
+  color:#73838d;
+  margin:0;
+}
+.song-card > div:nth-child(2){
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:14px;
+  width:100%;
+}
+.song-tags{
+  justify-content:flex-start;
+  align-items:flex-end;
+  gap:7px;
+  margin:18px 0 0;
+  min-height:0;
+}
+.song-tag{
+  padding:6px 11px;
+  font-size:.78rem;
+}
+.card-actions{
+  position:static;
+  width:auto;
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  gap:8px;
+  margin:18px 0 0;
+  align-self:end;
+}
+.copy-btn{
+  min-width:70px;
+  padding:8px 14px;
+  white-space:nowrap;
+}
+.song-link{
+  margin-top:0;
+  padding:8px 13px;
+  white-space:nowrap;
+}
+@media(max-width:720px){
+  .song-grid{
+    grid-template-columns:1fr;
+  }
+  .song-card{
+    min-height:150px;
+  }
+  .song-card > div:nth-child(2){
+    grid-template-columns:1fr;
+  }
+  .card-actions{
+    width:100%;
+    justify-content:flex-end;
+    margin-top:12px;
+  }
+}
+
+
+/* 一行四張卡片版：縮短長方形卡片 */
+.page{
+  width:min(1280px,calc(100% - 32px));
+}
+.song-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.song-card{
+  min-height:154px;
+  padding:18px 16px 16px;
+  border-radius:22px;
+}
+.song-title{
+  font-size:1.22rem;
+  line-height:1.34;
+  margin-bottom:6px;
+}
+.artist{
+  font-size:.88rem;
+}
+.song-card > div:nth-child(2){
+  grid-template-columns:1fr;
+  gap:8px;
+}
+.song-tags{
+  margin-top:14px;
+  gap:6px;
+}
+.song-tag{
+  font-size:.72rem;
+  padding:5px 9px;
+}
+.card-actions{
+  width:100%;
+  justify-content:flex-end;
+  margin-top:10px;
+}
+.copy-btn,
+.song-link{
+  font-size:.78rem;
+  padding:7px 11px;
+}
+
+@media(max-width:1100px){
+  .song-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:820px){
+  .song-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px){
+  .song-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* Tomato 參考配置：四欄卡片重新整理間距與比例 */
+.page{
+  width:min(1180px,calc(100% - 36px));
+}
+.songs-panel{
+  padding:28px;
+}
+.song-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:20px;
+}
+.song-card{
+  min-height:176px;
+  padding:20px 18px 18px;
+  border-radius:24px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.song-card > div:first-child{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:74px;
+  padding:0;
+}
+.song-title{
+  font-size:1.24rem;
+  font-weight:900;
+  line-height:1.34;
+  text-align:center;
+  margin:0 0 7px;
+  color:#223847;
+}
+.artist{
+  font-size:.88rem;
+  line-height:1.45;
+  text-align:center;
+  margin:0;
+  color:#73838d;
+}
+.song-card > div:nth-child(2){
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  width:100%;
+}
+.song-tags{
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  margin:14px 0 12px;
+  min-height:26px;
+}
+.song-tag{
+  font-size:.72rem;
+  padding:5px 9px;
+}
+.card-actions{
+  position:static;
+  width:100%;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  margin:0;
+}
+.copy-btn,
+.song-link{
+  font-size:.78rem;
+  padding:7px 12px;
+  border-radius:999px;
+}
+.copy-btn{
+  min-width:66px;
+}
+@media(max-width:1120px){
+  .song-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:820px){
+  .song-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+  }
+}
+@media(max-width:560px){
+  .page{
+    width:min(100% - 28px,480px);
+  }
+  .songs-panel{
+    padding:20px;
+  }
+  .song-grid{
+    grid-template-columns:1fr;
+  }
+  .song-card{
+    min-height:160px;
+  }
+}
+
+
+/* 卡片內歌名、歌手、標籤靠左；複製按鈕位置不變 */
+.song-card{
+  text-align:left;
+}
+.song-card > div:first-child{
+  align-items:flex-start;
+  text-align:left;
+  width:100%;
+}
+.song-title{
+  text-align:left;
+  width:100%;
+}
+.artist{
+  text-align:left;
+  width:100%;
+}
+.song-tags{
+  justify-content:flex-start;
+  align-items:center;
+  width:100%;
+}
+
+
+/* 歌名、歌手、標籤間距微調 */
+.song-title{
+  margin-bottom:12px;
+}
+.artist{
+  margin-bottom:8px;
+}
+.song-tags{
+  margin-top:20px;
+}
