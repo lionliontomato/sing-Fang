@@ -74,9 +74,9 @@ function sheetUrl() {
 window.handleSheetResponse = function(response) {
   try {
     const rows = response?.table?.rows || [];
-    const startIndex = Math.max((config.startRow || 3) - 1, 0);
+    const startIndex = (config.startRow || 3) - 1;
 
-    // A/B/C/D：歌曲資料。F欄絕對不套進歌曲資料。
+    // A/B/C/D：歌曲資料。F 欄絕對不套進歌曲資料。
     state.songs = rows.slice(startIndex).map((row, idx) => {
       const cells = row.c || [];
       const title = cellText(cells[config.columns.title]);
@@ -94,7 +94,7 @@ window.handleSheetResponse = function(response) {
       };
     }).filter(song => song.title && song.artist);
 
-    // F欄：只作為「標籤按鈕總清單」，不依列數、不對應歌曲。
+    // F 欄：只作為「標籤按鈕總清單」，不依列數、不對應歌曲。
     const masterTags = [];
     rows.forEach(row => {
       const cells = row.c || [];
@@ -102,7 +102,7 @@ window.handleSheetResponse = function(response) {
     });
     state.masterTags = [...new Set(masterTags)].filter(Boolean);
 
-    // 若F欄空白，才退回用歌曲標籤產生按鈕，避免網站沒有按鈕。
+    // 若 F 欄空白，才退回用歌曲標籤產生按鈕，避免網站沒有按鈕。
     if (state.masterTags.length === 0) {
       const fallback = [];
       state.songs.forEach(song => song.tags.forEach(tag => fallback.push(tag)));
@@ -223,7 +223,7 @@ function renderSongs() {
     card.className = "song-card";
     const palette = CARD_PALETTES[index % CARD_PALETTES.length];
     card.style.setProperty("--card-from", palette[0]);
-    card.style.setProperty("--card-to", palette[1]);
+    card.setProperty("--card-to", palette[1]);
 
     const top = document.createElement("div");
     const title = document.createElement("h3");
